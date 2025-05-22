@@ -1,0 +1,37 @@
+.category {
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.category img {
+  width: 100%;
+  align-items: center;
+  max-height: 250px;
+  object-fit: contain;
+  padding: 5px 50px;
+}
+.category a {
+  text-decoration: none;
+  color: rgb(35, 35, 35);
+}
+.category span {
+  padding: 5px;
+  font-weight: bold;
+  font-size: medium;
+}
+.category p {
+  /* padding: 2px; */
+  padding-bottom: 100px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: rgb(9, 132, 209);
+}
+/* style for container */
+.category_container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  place-items: center;
+  margin-top: -25%;
+}
