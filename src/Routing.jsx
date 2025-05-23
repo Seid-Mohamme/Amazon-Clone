@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./Pages/Landing/Landing";
 import Auth from "./Pages/Auth/Auth";
