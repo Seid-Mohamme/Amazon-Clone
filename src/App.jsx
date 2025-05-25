@@ -1,19 +1,32 @@
-// import { useState } from 'react'
-// import { Carousel } from "react-responsive-carousel";
+import { useContext, useEffect } from "react";
 import "./App.css";
 import Routing from "./Routing";
-// import Header from "./Components/Header/Header";
-// import CarouselEffect from "./Components/Carousel/CarouselEffect";
-// import Category from "./Components/Category/Category";
-// import Product from "./Components/Product/Product";
-
+import { DataContext } from "./DataProvider/DataProvider";
+import { Type } from "./Utility/Action.Type";
+import { auth } from "./Utility/Firebase";
 function App() {
+  const [{ user }, dispatch] = useContext(DataContext);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log(authUser, "from firebase");
+      if (authUser) {
+        console.log(authUser, "from in");
+        dispatch({
+          type: Type.SET_USER,
+          user: authUser,
+        });
+      } else {
+        console.log(authUser, "from null");
+        dispatch({
+          type: Type.SET_USER,
+          user: null,
+        });
+      }
+    });
+  }, []);
   return (
     <div className="App">
-      {/* <Header />
-      <CarouselEffect />
-      <Category />
-      <Product /> */}
       <Routing />
     </div>
   );

@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
 import { BiCart } from "react-icons/bi";
@@ -8,9 +8,10 @@ import LowerHeader from "./LowerHeader";
 import { useContext } from "react";
 import { DataContext } from "../../DataProvider/DataProvider";
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
+import { auth } from "../../Utility/Firebase";
 
 const Header = () => {
-  const [{ basket }, disPatch] = useContext(DataContext);
+  const [{ basket, user }, disPatch] = useContext(DataContext);
   // for Cart number display total
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
@@ -51,7 +52,7 @@ const Header = () => {
             </select>
             <input type="text" />
             {/* Icon */}
-            <BsSearch size={25} />
+            <BsSearch size={38} />
           </div>
           {/* Other Section */}
           {/* Right Side Link */}
@@ -70,9 +71,28 @@ const Header = () => {
               </div>
             </Link>
 
-            <Link to="">
-              <p>Hello, Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && "/auth"}>
+              <div className="">
+                {user ? (
+                  <>
+                    <p>Hello {user?.email.split("@")[0]}</p>
+                    <span
+                      onClick={() => {
+                        auth.signOut();
+                        console.log("clicked", user);
+                      }}
+                    >
+                      {" "}
+                      Sign Out
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span>Account & List</span>
+                  </>
+                )}
+              </div>
             </Link>
             <Link to="/orders">
               <p>Returns</p>
@@ -83,8 +103,6 @@ const Header = () => {
               <BiCart size={35} />
               {/* <img src="cart2.png" alt="" /> */}
               <span>{totalItem}</span>
-              {/* <p>Cart</p> */}
-              {/* <span>{TotalItem}</span> */}
             </Link>
           </div>
         </div>
