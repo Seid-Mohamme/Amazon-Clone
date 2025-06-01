@@ -6,8 +6,11 @@ function CategoryCard(props,flex) {
   const { data } = props;
   return (
     <div className={styles.category}>
-      <Link to={`/category/${data.name}`}>
+      <Link to={`/category/${data.category}`}>
+      {/* <Link to="/category/"> */}
+      {/* <Link to={`/category/${category}`}> */}
         <span>{data.category}</span>
+        {/* Electronics, jewellery... */}
         <img src={data.imageLink} alt={data.title} />
         <p>Shop Now</p>
       </Link>

@@ -52,7 +52,7 @@ const Header = () => {
             </select>
             <input type="text" />
             {/* Icon */}
-            <BsSearch size={38} />
+            <BsSearch size={38} placeholder="search product"/>
           </div>
           {/* Other Section */}
           {/* Right Side Link */}

@@ -41,7 +41,7 @@ function Results() {
               return (
                 <ProductCard
                   key={singleProduct.id}
-                  data={singleProduct}
+                  product={singleProduct}
                   renderADD={true}
                 />
               );

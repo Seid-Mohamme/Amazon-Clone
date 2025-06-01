@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import styles from "./Signup.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../../src/Utility/Firebase";
 import { Type } from "../../../src/Utility/Action.Type";
 import {
@@ -9,6 +9,8 @@ import {
 } from "firebase/auth";
 import { DataContext } from "../../DataProvider/DataProvider";
 import { ClipLoader } from "react-spinners";
+// import { useNavigate } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -18,6 +20,7 @@ function Auth() {
   const [loading, setLoading] = useState({ signIn: false, signUp: false });
   // event handler
   const navigate = useNavigate();
+  const navStateData = useLocation(); // ✅ THIS FIXES YOUR ERROR
   const authHandler = (e) => {
     e.preventDefault();
     // console.log(e.target.name);
@@ -25,15 +28,15 @@ function Auth() {
       // we do sign in related
       setLoading({ ...loading, signIn: true });
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentioal) => {
-          console.log(userCredentioal);
+        .then((userCredential) => {
+          console.log(userCredential);
           dispatch({
             type: Type.SET_USER,
-            user: userCredentioal.user,
+            user: userCredential.user,
           });
           setLoading({ ...loading, signIn: false });
           setError("");
-          navigate("/");
+          navigate(navStateData?.state?.redirect || "/");
         })
         .catch((err) => {
           // console.log(err)
@@ -44,11 +47,11 @@ function Auth() {
       // create new account
       setLoading({ ...loading, signUp: true });
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredentioal) => {
-          console.log(userCredentioal);
+        .then((userCredential) => {
+          console.log(userCredential);
           dispatch({
             type: Type.SET_USER,
-            user: userCredentioal.user,
+            user: userCredential.user,
           });
           setError("");
           setLoading({ ...loading, signUp: false });
@@ -73,7 +76,20 @@ function Auth() {
 
       {/* form */}
       <div className={styles.login_container}>
-        <h1>Siggn In</h1>
+        <h1>Sign In</h1>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              padding: "5px",
+              textAlign: "center",
+              color: "red",
+              fontWeight: "bold",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
+
         <form action="">
           <div>
             <label htmlFor="email">Email</label>
@@ -100,8 +116,6 @@ function Auth() {
             onClick={authHandler}
             className={styles.login_signinbutton}
           >
-            {/* {loading.signIn ? <ClipLoader color="white" size={25} />}
-            Sign In */}
             {loading.signIn ? (
               <ClipLoader color="white" size={25} />
             ) : (

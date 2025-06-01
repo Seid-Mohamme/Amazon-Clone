@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../../DataProvider/DataProvider";
 import { Type } from "../../Utility/Action.Type";
-function ProductCard({ product, flex, renderDesc = false }) {
-  const { image, title, id, rating, price, description } = product;
+function ProductCard({ product = {}, flex, renderDesc, showButton = true }) {
+  if (!product) return null;
+  const { image, title, id, rating, price, description, amount } = product;
   const [state, dispatch] = useContext(DataContext);
+
   const addToCart = () => {
     dispatch({
       type: Type.ADD_TO_BASKET,
@@ -41,9 +43,12 @@ function ProductCard({ product, flex, renderDesc = false }) {
           {/* price */}
           <CurrencyFormat amount={price} />
         </div>
-        <button className={styles.button} onClick={addToCart}>
-          Add to Cart
-        </button>
+        {/* {showButton && ...used for displaying the images ...it also apply on orders.jsx */}
+        {showButton && (
+          <button className={styles.button} onClick={addToCart}>
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );

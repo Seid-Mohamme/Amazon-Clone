@@ -1,5 +1,6 @@
 // import React from "react";
 import { FadeLoader } from "react-spinners";
+// react-spinners provides beautiful and customizable loading indicators
 function Loader() {
   return (
     <div

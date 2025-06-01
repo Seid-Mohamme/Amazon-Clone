@@ -2,20 +2,20 @@ export const CategoryData = [
   {
     id: 10,
     title: "SanDisk SSD ",
-    category: "Electronics",
+    category: "electronics",
     imageLink: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
   },
   {
     id: 7,
     title: "White Gold Plated Princess",
-    category: "Jewelery",
+    category: "jewelery",
     imageLink:
       "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
   },
   {
     id: 3,
     title: "Mens Cotton Jacket",
-    category: "Men's clothing",
+    category: "men's clothing",
     imageLink: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
   },
   {
