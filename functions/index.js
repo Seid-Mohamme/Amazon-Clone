@@ -1,4 +1,4 @@
-const functions = require("firebase-functions"); // ✅ This is missing!
+const functions = require("firebase-functions");
 const { onRequest } = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 // After installing the express, cors, dotenv, stripe we add here to initialize
